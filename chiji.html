@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chijisuoquan</title>
+	<style type="text/css">
+		html,body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		.box {
+			width: 600px;
+			height: 600px;
+			margin: 0 auto;
+			position: relative;
+
+			background: url(images/map.jpg);
+		}
+		.white {
+			border-radius: 50%;
+			position: absolute;
+			border: 1px solid #fff;
+		}
+		.blue {
+			position: absolute;
+			border: 1px solid blue;
+			border-radius: 50%;
+			transition: all 3s;
+			width: 800px;
+			height: 800px;
+			left: -100px;
+			top: -100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="blue"></div>
+		<div class="white"></div>
+		
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var boxW = 600,
+		    whiteW = 0,
+		    whiteL = 0,
+		    whiteT = 0,
+		    blueW = 800;
+		function init() {
+			whiteW = boxW * .8;
+			whiteT = random(0, boxW * .2);
+			whiteL = random(0, boxW * .2);
+			$(".white").css({
+			  "width": whiteW,
+			  "height": whiteW,
+			  "left": whiteL,
+			  "top": whiteT
+			});
+			setTimeout(function() {
+				$(".blue").css({
+				  "width": whiteW,
+				  "height": whiteW,
+				  "left": whiteL,
+				  "top": whiteT	
+				})	
+				setTimeout( function() {
+					setInterval( caculateWhiteCircle(),10000)
+				},3000)
+			},3000)
+		}
+
+		// 生成两个参数范围内的随机数
+		function random(lower, upper) {
+		    return Math.floor(Math.random() * (upper - lower+1)) + lower;
+		}
+
+		function caculateWhiteCircle() {
+			whiteW = whiteW / 2;
+			if( whiteW < 5 ) {
+				return;
+			}
+			whiteT = whiteT + random(0, whiteW );
+			whiteL = whiteT;
+			$(".white").css({
+			  "width": whiteW,
+			  "height": whiteW,
+			  "left": whiteL,
+			  "top": whiteT
+			});	
+			setTimeout( function() {
+				$(".blue").css({
+				  "width": whiteW,
+				  "height": whiteW,
+				  "left": whiteL,
+				  "top": whiteT,
+				});
+			},7000)
+			return caculateWhiteCircle;
+		}
+		init();
+
+	</script>
+</body>
+</html>
